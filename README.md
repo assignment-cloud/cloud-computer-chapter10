@@ -62,7 +62,7 @@
 - **TUYIZERE Claude**
 - **NTAWURENZINGABIRE Dorothee**
 - **NSHUTI Maurice**
-- **NGOGA NIYOMANA Pacifique**
+- **NIYOMANA NGOGA Pacifique**
 
 ---
 *Developed for the Cloud Computing course taught by Dr. Irene.*
