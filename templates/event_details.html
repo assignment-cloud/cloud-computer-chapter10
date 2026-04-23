@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Logs | {{ name }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --bg-color: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: radial-gradient(circle at top right, rgba(99, 102, 241, 0.1), transparent 40%);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .back-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            text-decoration: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .log-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .log-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            gap: 2rem;
+            animation: slideIn 0.5s ease-out backwards;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .status-badge {
+            background: rgba(34, 197, 94, 0.1);
+            color: #4ade80;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .file-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .file-info p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .timestamp {
+            font-family: monospace;
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+
+        .no-logs {
+            text-align: center;
+            padding: 5rem;
+            background: var(--card-bg);
+            border-radius: 24px;
+            border: 1px dashed var(--border-color);
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Event Processing Logs</h1>
+            <a href="{% url 'index' %}" class="back-btn">← Back to Dashboard</a>
+        </div>
+
+        {% if logs %}
+        <div class="log-grid">
+            {% for log in logs %}
+            <div class="log-card" style="animation-delay: {{ forloop.counter0|add:1 }}00ms">
+                <span class="status-badge">{{ log.status }}</span>
+                <div class="file-info">
+                    <h4>{{ log.file_name }}</h4>
+                    <p>Size: {{ log.size_bytes|filesizeformat }} | Event: {{ log.event }}</p>
+                </div>
+                <div class="timestamp">
+                    {{ log.processed_at }}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="no-logs">
+            <p>No events processed yet. Upload a file from the dashboard to see logs here.</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

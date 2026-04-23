@@ -1,5 +1,6 @@
 import sys
 import os
+import json
 from django.conf import settings
 from django.shortcuts import render
 from django.utils import timezone
@@ -60,4 +61,24 @@ def upload_file(request):
             "file_name": uploaded_file.name
         })
     
-    return JsonResponse({"status": "error", "message": "Only POST requests with a file are allowed."}, status=400)
+    return JsonResponse({"status": "error", "message": "Only POST requests with a file are allowed."}, status=400)
+
+def event_logs(request):
+    log_dir = os.path.join(settings.BASE_DIR, 'events', 'logs')
+    logs = []
+    
+    if os.path.exists(log_dir):
+        for filename in os.listdir(log_dir):
+            if filename.endswith('_metadata.json'):
+                with open(os.path.join(log_dir, filename), 'r') as f:
+                    logs.append(json.load(f))
+    
+    # Sort logs by processed_at descending
+    logs.sort(key=lambda x: x.get('processed_at', ''), reverse=True)
+    
+    context = {
+        "logs": logs,
+        "name": "Group 10"
+    }
+    return render(request, "event_details.html", context)
+

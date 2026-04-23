@@ -264,6 +264,14 @@
                         </div>
                     </form>
                     <div id="uploadStatus" class="upload-status"></div>
+                    
+                    <div id="processingArea" style="display: none; margin-top: 1.5rem;">
+                        <p style="font-size: 0.85rem; color: var(--primary); margin-bottom: 0.5rem;">Simulating Cloud Processing...</p>
+                        <div class="progress-bg">
+                            <div id="progressBar" class="progress-fill"></div>
+                        </div>
+                        <a href="/events/" class="view-results-btn" style="display: none; margin-top: 1rem;">View Processing Results →</a>
+                    </div>
                 </div>
             </div>
 
@@ -386,6 +394,38 @@
             color: #f87171;
             border: 1px solid rgba(239, 68, 68, 0.2);
         }
+
+        /* Progress Simulation */
+        .progress-bg {
+            background: rgba(255, 255, 255, 0.05);
+            height: 6px;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(to right, var(--primary), #a855f7);
+            height: 100%;
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+
+        .view-results-btn {
+            display: inline-block;
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--primary);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--primary);
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+
+        .view-results-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
     </style>
 
     <script>
@@ -418,6 +458,9 @@
                     statusDiv.className = 'upload-status status-success';
                     statusDiv.textContent = result.message;
                     fileInput.value = '';
+                    
+                    // Start progress simulation
+                    simulateProcessing();
                 } else {
                     statusDiv.className = 'upload-status status-error';
                     statusDiv.textContent = 'Error: ' + result.message;
@@ -427,6 +470,26 @@
                 statusDiv.textContent = 'Network error occurred.';
             }
         });
+
+        function simulateProcessing() {
+            const area = document.getElementById('processingArea');
+            const bar = document.getElementById('progressBar');
+            const btn = document.querySelector('.view-results-btn');
+            
+            area.style.display = 'block';
+            btn.style.display = 'none';
+            let width = 0;
+            
+            const interval = setInterval(() => {
+                if (width >= 100) {
+                    clearInterval(interval);
+                    btn.style.display = 'inline-block';
+                } else {
+                    width += 2;
+                    bar.style.width = width + '%';
+                }
+            }, 50); // 2.5 seconds total
+        }
 
         function getCookie(name) {
             let cookieValue = null;
