@@ -1,1 +1,1 @@
-web: gunicorn cloudapp.wsgi --log-file -
+web: sh start.sh
