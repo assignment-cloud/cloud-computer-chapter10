@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Chapter 10: Cloud Application Assignment
 ## Group 10 - Cloud Computing (Level 4)
 
@@ -34,9 +35,9 @@ Integrated via **GitHub Actions** (`.github/workflows/ci.yml`):
 - `docker build -t cloud-app:latest .`
 
 ### 4. Deployment to Test Environment
-- Automated via the **Deployment Stage** in our CI/CD pipeline.
-- Simulates a seamless transition of the containerized image to a test cloud host.
-- URL: `http://cloud-app-test.internal` (Simulated)
+- **Live Deployment**: The application is successfully deployed to **Render**.
+- **URL**: [https://cloud-computer-chapter10.onrender.com](https://cloud-computer-chapter10.onrender.com)
+- The pipeline verifies the deployment readiness of the containerized app.
 
 ### 5. Metrics & Alerting Configuration
 - **Defined Metric**: System CPU Utilization.
@@ -62,3 +63,6 @@ Integrated via **GitHub Actions** (`.github/workflows/ci.yml`):
 
 ---
 *Developed for the Cloud Computing course taught by Dr. Irene.*
+=======
+# cloud-computer-chapter10
+>>>>>>> 93d6e5d66e41351d1a216fd8b6bddaed3ee5c42c
