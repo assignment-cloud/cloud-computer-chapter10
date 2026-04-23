@@ -60,7 +60,7 @@
 - **Belise UMUTONI**
 - **MUHIRWA Joyeuse Sainte Trinite**
 - **TUYIZERE Claude**
-- **NTAWURENZINGABIRE Dorothee**
+- **Dorothee NTAWURENZINGABIRE **
 - **NSHUTI Maurice**
 - **NIYOMANA NGOGA Pacifique**
 
