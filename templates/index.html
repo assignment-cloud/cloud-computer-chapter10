@@ -249,8 +249,25 @@
                     {% endfor %}
                 </ul>
             </div>
+            
+            <div class="event-testing-section" style="margin-top: 3rem;">
+                <h3>Event-Driven Testing (Chapter 11)</h3>
+                <div class="upload-container">
+                    <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.95rem;">
+                        Upload a file below to trigger the serverless cloud function simulator.
+                    </p>
+                    <form id="uploadForm" enctype="multipart/form-data">
+                        <div class="file-input-wrapper">
+                            <input type="file" id="fileInput" name="file" required>
+                            <button type="submit" class="upload-btn">Upload to Storage</button>
+                        </div>
+                    </form>
+                    <div id="uploadStatus" class="upload-status"></div>
+                </div>
+            </div>
 
             <div class="status-bar">
+
                 <div class="status-item">
                     <span class="status-dot"></span>
                     System Status: Online
@@ -305,6 +322,126 @@
             50% { transform: scale(1.5); opacity: 0.5; }
             100% { transform: scale(1); opacity: 1; }
         }
+
+        /* Chapter 11 Styles */
+        .event-testing-section h3::after {
+            background: #a855f7 !important;
+        }
+
+        .upload-container {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 16px;
+        }
+
+        .file-input-wrapper {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        input[type="file"] {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem;
+            border-radius: 8px;
+            color: var(--text-muted);
+            flex-grow: 1;
+        }
+
+        .upload-btn {
+            background: linear-gradient(135deg, var(--primary), #a855f7);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .upload-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
+        }
+
+        .upload-status {
+            margin-top: 1rem;
+            padding: 0.75rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .status-success {
+            background: rgba(34, 197, 94, 0.1);
+            color: #4ade80;
+            border: 1px solid rgba(34, 197, 94, 0.2);
+        }
+
+        .status-error {
+            background: rgba(239, 68, 68, 0.1);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
     </style>
+
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const fileInput = document.getElementById('fileInput');
+            const statusDiv = document.getElementById('uploadStatus');
+            
+            if (!fileInput.files[0]) return;
+
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+
+            statusDiv.style.display = 'block';
+            statusDiv.className = 'upload-status';
+            statusDiv.textContent = 'Uploading...';
+
+            try {
+                const response = await fetch('/api/upload/', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRFToken': getCookie('csrftoken')
+                    }
+                });
+
+                const result = await response.json();
+                
+                if (result.status === 'success') {
+                    statusDiv.className = 'upload-status status-success';
+                    statusDiv.textContent = result.message;
+                    fileInput.value = '';
+                } else {
+                    statusDiv.className = 'upload-status status-error';
+                    statusDiv.textContent = 'Error: ' + result.message;
+                }
+            } catch (error) {
+                statusDiv.className = 'upload-status status-error';
+                statusDiv.textContent = 'Network error occurred.';
+            }
+        });
+
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+    </script>
+
 </body>
 </html>
