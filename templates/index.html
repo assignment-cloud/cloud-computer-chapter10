@@ -257,6 +257,7 @@
                         Upload a file below to trigger the serverless cloud function simulator.
                     </p>
                     <form id="uploadForm" enctype="multipart/form-data">
+                        {% csrf_token %}
                         <div class="file-input-wrapper">
                             <input type="file" id="fileInput" name="file" required>
                             <button type="submit" class="upload-btn">Upload to Storage</button>
@@ -407,7 +408,7 @@
                     method: 'POST',
                     body: formData,
                     headers: {
-                        'X-CSRFToken': getCookie('csrftoken')
+                        'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
                     }
                 });
 

@@ -30,6 +30,13 @@
 2. In another window, add any file to the `events/uploads/` folder.
 3. Observe the terminal logs and the generated metadata in `events/logs/`.
 
+### 🌐 Live Frontend Testing (Production):
+1. Navigate to the **[Live Dashboard](https://cloud-computer-chapter10.onrender.com)**.
+2. Scroll to the **"Event-Driven Testing"** section.
+3. Upload any file (Image, Text, etc.).
+4. The dashboard will communicate with the backend API (`/api/upload/`), save the file to cloud storage, and trigger the background processing function.
+5. Verification can be seen in the real-time server logs on Render.
+
 ### 💡 Design Analysis:
 - **Advantages**:
     - **Scalability**: Logic only executes when an event occurs, handling bursts easily.
