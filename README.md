@@ -47,10 +47,22 @@ A premium, modern web application built with Django for the Cloud Computing cour
 ---
 *Developed for the Cloud Computing course taught by Dr. Irene.*
 
-## CI/CD Pipeline
-This project uses **GitHub Actions** to automate the testing process. The workflow is triggered on every push to the `master` branch.
+## CI/CD Pipeline (Chapter 10 Requirements)
+This project implements a complete DevOps pipeline using **GitHub Actions**:
 
-### Automated Tasks:
-- **Environment Setup**: Configures Python 3.10.
-- **Dependency Installation**: Installs all required packages from `requirements.txt`.
-- **Test Execution**: Runs the Django test suite (`python manage.py test`) to ensure code stability.
+### 1. Build & Test Stages
+- **Test**: Automated tests run on every push using `pytest` and `Django Test`.
+- **Build**: Compiles the application and environment.
+
+### 2. Packaging (Artifacts)
+- The application is packaged as a **Docker Container Image** using the included `Dockerfile`.
+- `docker build -t cloud-app:latest .`
+
+### 3. Deployment
+- **Test Environment**: Automated deployment simulation to a test server.
+- The pipeline verifies the deployment readiness of the containerized app.
+
+## Monitoring & Alerting
+- **Metrics**: Tracks system performance (CPU, Memory, Request Latency).
+- **Alerting Rule**: Configured to trigger an alert if **CPU Usage > 80%** for more than 5 minutes.
+- Configuration found in: `monitoring/alert_rules.yml`
