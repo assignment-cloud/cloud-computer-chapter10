@@ -1,55 +1,52 @@
-# Chapter 10: Cloud Application Assignment
-## Group 10 - Cloud Computing (Level 4)
+# Cloud Computing Coursework
+## Group 10 - Level 4
 
 ![Django CI Pipeline](https://github.com/assignment-cloud/cloud-computer-chapter10/actions/workflows/ci.yml/badge.svg)
 
 ---
 
-## 📋 Assignment Overview
-**Objective:** Create a cloud application repository that demonstrates a full DevOps lifecycle, including build, test, packaging, deployment, and monitoring.
+## 📋 Chapter 10: DevOps & CI/CD Lifecycle
+**Objective:** Demonstrate a full DevOps lifecycle for a cloud application.
 
-### 🎯 Core Requirements:
-1. **Repository & App**: Create a Git repository and commit a web application.
-2. **Build & Test**: Define automated build and test stages.
-3. **Packaging**: Package the application as a container image.
-4. **Deployment**: Simulate deployment to a test environment.
-5. **Monitoring**: Record a metric and configure an alerting rule (CPU > 80%).
+### 🚀 Solutions:
+1. **Git Repository & App**: Hosted at [GitHub](https://github.com/assignment-cloud/cloud-computer-chapter10). Modern Django web app.
+2. **Build & Test**: Automated via GitHub Actions. Runs tests on every push.
+3. **Packaging**: Application is containerized using **Docker** (`Dockerfile`).
+4. **Deployment**: Live deployment on **Render**: [https://cloud-computer-chapter10.onrender.com](https://cloud-computer-chapter10.onrender.com)
+5. **Monitoring**: Alerting rule defined in `monitoring/alert_rules.yml` (CPU > 80%).
 
 ---
 
-## 🚀 Implementation & Solutions
+## ⚡ Chapter 11: Event-Driven Architecture
+**Objective:** Build an event-driven workflow using a storage trigger and a cloud function.
 
-### 1. Git Repository & Web Application
-- **Repository**: [assignment-cloud/cloud-computer-chapter10](https://github.com/assignment-cloud/cloud-computer-chapter10)
-- **Application**: A modern Django-based web application with a premium UI, system dashboard, and health monitoring APIs.
+### 🛠️ Implementation:
+- **Storage Bucket (Simulated)**: The `events/uploads/` directory.
+- **Event Trigger**: `events/trigger.py` monitors for new file uploads.
+- **Cloud Function**: `events/function.py` processes the file and saves metadata to `events/logs/`.
 
-### 2. Build and Test Stages
-Integrated via **GitHub Actions** (`.github/workflows/ci.yml`):
-- **Test Stage**: Runs `python manage.py test` to verify code integrity on every push.
-- **Build Stage**: Sets up the Python environment and installs dependencies from `requirements.txt`.
+### 📝 How to run the simulation:
+1. Open a terminal and run: `python events/trigger.py`
+2. In another window, add any file to the `events/uploads/` folder.
+3. Observe the terminal logs and the generated metadata in `events/logs/`.
 
-### 3. Packaging (Containerization)
-- The application is containerized using **Docker**.
-- **Artifact**: A Docker image is created using the `Dockerfile` in the root directory.
-- `docker build -t cloud-app:latest .`
-
-### 4. Deployment to Test Environment
-- Automated via the **Deployment Stage** in our CI/CD pipeline.
-- Simulates a seamless transition of the containerized image to a test cloud host.
-- URL: `http://cloud-app-test.internal` (Simulated)
-
-### 5. Metrics & Alerting Configuration
-- **Defined Metric**: System CPU Utilization.
-- **Alerting Rule**: An alert is configured to trigger if **CPU usage > 80%** for more than 5 minutes.
-- **Configuration File**: `monitoring/alert_rules.yml`
+### 💡 Design Analysis:
+- **Advantages**:
+    - **Scalability**: Logic only executes when an event occurs, handling bursts easily.
+    - **Cost-Efficiency**: Resources are only consumed during active processing (Serverless model).
+    - **Asynchronous**: The main application isn't blocked while the file is being processed.
+- **Limitations**:
+    - **Cold Starts**: Initial invocation can be slow.
+    - **Timeout Limits**: Not suitable for extremely long-running tasks.
+    - **Observability**: Tracking a single request across multiple event-driven components can be difficult.
 
 ---
 
 ## 🛠️ Tech Stack
 - **Backend**: Django 6.0
-- **Frontend**: HTML5, Vanilla CSS3 (Glassmorphism UI)
 - **DevOps**: GitHub Actions, Docker
-- **Monitoring**: Prometheus-style Alert Rules
+- **Serverless Simulator**: Python Event-Driven logic
+- **Monitoring**: Prometheus Alert Rules
 
 ## 👥 Team Members
 - **NDOLI Jean Damascene**
