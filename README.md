@@ -57,7 +57,7 @@
 
 ## 👥 Team Members
 - **NDOLI Jean Damascene**
-- **UMUTONI Belise**
+- **Belise UMUTONI**
 - **MUHIRWA Joyeuse Sainte Trinite**
 - **TUYIZERE Claude**
 - **NTAWURENZINGABIRE Dorothee**
