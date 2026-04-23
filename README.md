@@ -59,7 +59,7 @@
 - **NDOLI Jean Damascene**
 - **Belise UMUTONI**
 - **MUHIRWA Joyeuse Sainte Trinite**
-- **TUYIZERE Claude**
+- **CLAUDE TUYIZERE**
 - **Dorothee NTAWURENZINGABIRE **
 - **NSHUTI Maurice**
 - **NIYOMANA NGOGA Pacifique**
