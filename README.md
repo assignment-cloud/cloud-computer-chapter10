@@ -5,7 +5,7 @@
 
 ---
 
-## 📋 Chapter 10: DevOps & CI/CD Lifecycle
+## 📋 CHAPTER 10: DevOps & CI/CD Lifecycle
 **Objective:** Demonstrate a full DevOps lifecycle for a cloud application.
 
 ### 🚀 Solutions:
@@ -17,7 +17,7 @@
 
 ---
 
-## ⚡ Chapter 11: Event-Driven Architecture
+## ⚡ CHAPTER 11: Event-Driven Architecture
 **Objective:** Build an event-driven workflow using a storage trigger and a cloud function.
 
 ### 🛠️ Implementation:
@@ -55,7 +55,7 @@
 - **Serverless Simulator**: Python Event-Driven logic
 - **Monitoring**: Prometheus Alert Rules
 
-## 👥 Team Members
+## 👥 TEAM MEMBERS
 - **Jean Damascene NDOLI**
 - **Belise UMUTONI**
 - **Joyeuse Sainte Trinite MUHIRWA**
