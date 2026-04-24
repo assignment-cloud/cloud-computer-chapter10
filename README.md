@@ -1,5 +1,5 @@
-# Cloud Computing Coursework
-## Group 10 - Level 4
+# CLOUD COMPUTING COURSE WORK
+## GROUP 10 - YEAR 4 IT
 
 ![Django CI Pipeline](https://github.com/assignment-cloud/cloud-computer-chapter10/actions/workflows/ci.yml/badge.svg)
 
@@ -56,13 +56,13 @@
 - **Monitoring**: Prometheus Alert Rules
 
 ## 👥 Team Members
-- **NDOLI Jean Damascene**
+- **Jean Damascene NDOLI**
 - **Belise UMUTONI**
-- **MUHIRWA Joyeuse Sainte Trinite**
-- **CLAUDE TUYIZERE**
+- **Joyeuse Sainte Trinite MUHIRWA**
+- **Claude TUYIZERE**
 - **Dorothee NTAWURENZINGABIRE**
-- **NSHUTI Maurice**
-- **NIYOMANA NGOGA Pacifique**
+- **Maurice NSHUTI**
+- **Pacifique NGOGA NIYOMANA**
 
 ---
 *Developed for the Cloud Computing course taught by Dr. Irene.*
