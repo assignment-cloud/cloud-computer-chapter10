@@ -65,4 +65,4 @@
 - **Pacifique NGOGA NIYOMANA**
 
 ---
-*Developed for the Cloud Computing course taught by Dr. Irene.*
+*Developed for the Cloud Computing course taught by Dr. Irene MIHIGO.*
